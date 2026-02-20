@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Access Manager - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5048e5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar-item-active {
+            background-color: rgba(80, 72, 229, 0.1);
+            color: #5048e5;
+            border-right: 3px solid #5048e5;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+<div>
+<h1 class="text-lg font-bold leading-none">Access Manager</h1>
+<p class="text-xs text-slate-500 mt-1">Admin Console</p>
+</div>
+</div>
+<nav class="flex-1 mt-4 px-2 space-y-1">
+<a class="sidebar-item-active flex items-center gap-3 px-4 py-3 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">calendar_today</span>
+<span class="text-sm font-medium">Roles &amp; Schedules</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">menu_book</span>
+<span class="text-sm font-medium">Knowledge Base</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">lock</span>
+<span class="text-sm font-medium">Vault</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">check_circle</span>
+<span class="text-sm font-medium">Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="text-sm font-medium">Notifications</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2">
+<div class="size-8 rounded-full bg-slate-200 bg-cover bg-center" data-alt="User avatar profile picture" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBqPbEGFsfjQASnayjPBGzOP7OKxSFtAD93h6d8MDZ82LVgdTfdBXO0N0kaKk8eLD2MsYVUl7FLnxiAh3wgQRldY2z6SQfrfgkGaEwMSlakY5Aoy1b_FKxmONRI_RFUj7rYPWxLOOoGG6fP_dci7h6etlpcrTJIdLQHRxMcN3mxeJUg5rSqiuvmpvHLPdVoEi1PKjipROauGyYIL35oLxu7mrHxBzNKDhgX7swBtWbE5CWwAIsGzF45TH24NOMHK58DCoa7jj4ot7M')"></div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-medium truncate">Alex Rivera</p>
+<p class="text-xs text-slate-500 truncate">Security Lead</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-sm cursor-pointer">settings</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-y-auto">
+<!-- Header -->
+<header class="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 sticky top-0 z-10">
+<div class="w-full max-w-md relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-slate-100 dark:bg-slate-800 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 focus:bg-white dark:focus:bg-slate-700 transition-all" placeholder="Search systems, users, or vaults..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+<button class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+                        New Request
+                    </button>
+</div>
+</header>
+<div class="p-8 space-y-8">
+<!-- Stat Widgets -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+<div class="size-12 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined">task</span>
+</div>
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Pending Tasks</p>
+<h3 class="text-2xl font-bold">12</h3>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+<div class="size-12 rounded-lg bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center text-amber-600">
+<span class="material-symbols-outlined">account_tree</span>
+</div>
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400 font-medium">New Processes</p>
+<h3 class="text-2xl font-bold">5</h3>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+<div class="size-12 rounded-lg bg-green-50 dark:bg-green-900/20 flex items-center justify-center text-green-600">
+<span class="material-symbols-outlined">schedule</span>
+</div>
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Active Shifts</p>
+<h3 class="text-2xl font-bold">8</h3>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm flex items-center gap-4">
+<div class="size-12 rounded-lg bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-purple-600">
+<span class="material-symbols-outlined">verified_user</span>
+</div>
+<div>
+<p class="text-sm text-slate-500 dark:text-slate-400 font-medium">Secure Credentials</p>
+<h3 class="text-2xl font-bold">45</h3>
+</div>
+</div>
+</section>
+<!-- Middle Content -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Notifications Reels Style -->
+<div class="lg:col-span-2 space-y-4">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold">Recent Notifications</h2>
+<button class="text-sm text-primary font-semibold hover:underline">View All</button>
+</div>
+<div class="flex flex-col gap-4">
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/40 transition-all flex gap-4">
+<div class="size-10 bg-slate-100 dark:bg-slate-800 rounded-full flex-shrink-0 flex items-center justify-center text-slate-500">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-semibold text-sm">New Access Request - John Doe</h4>
+<span class="text-xs text-slate-400">10m ago</span>
+</div>
+<p class="text-xs text-slate-500 mt-1">System Admin requested temporary elevated permissions for Production DB migration.</p>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/40 transition-all flex gap-4">
+<div class="size-10 bg-green-50 dark:bg-green-900/20 rounded-full flex-shrink-0 flex items-center justify-center text-green-600">
+<span class="material-symbols-outlined">security_update_good</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-semibold text-sm">Security Patch Applied</h4>
+<span class="text-xs text-slate-400">2h ago</span>
+</div>
+<p class="text-xs text-slate-500 mt-1">Critical vulnerability patch v2.4.1 successfully deployed to core infrastructure node.</p>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-primary/40 transition-all flex gap-4">
+<div class="size-10 bg-red-50 dark:bg-red-900/20 rounded-full flex-shrink-0 flex items-center justify-center text-red-600">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h4 class="font-semibold text-sm">Failed Login Attempt</h4>
+<span class="text-xs text-slate-400">Oct 24, 2023</span>
+</div>
+<p class="text-xs text-slate-500 mt-1">Multiple failed login attempts detected for account: 'Service_Worker_09'.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Today's Schedule -->
+<div class="space-y-4">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-lg font-bold">Today's Schedule</h2>
+<span class="text-xs font-medium text-slate-400 px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded-lg">Oct 25</span>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center gap-3">
+<div class="w-1 bg-primary h-10 rounded-full"></div>
+<div>
+<p class="text-xs font-bold text-primary">09:00 AM - 11:00 AM</p>
+<p class="text-sm font-semibold">Security Audit Review</p>
+<p class="text-xs text-slate-400">Conference Room B</p>
+</div>
+</div>
+<div class="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center gap-3">
+<div class="w-1 bg-slate-300 dark:bg-slate-700 h-10 rounded-full"></div>
+<div>
+<p class="text-xs font-bold text-slate-500">12:30 PM - 02:00 PM</p>
+<p class="text-sm font-semibold">Team Lead Sync</p>
+<p class="text-xs text-slate-400">Zoom Call</p>
+</div>
+</div>
+<div class="p-4 flex items-center gap-3">
+<div class="w-1 bg-amber-400 h-10 rounded-full"></div>
+<div>
+<p class="text-xs font-bold text-amber-600">03:00 PM - 05:00 PM</p>
+<p class="text-sm font-semibold">Role Migration Workshop</p>
+<p class="text-xs text-slate-400">Main Lab</p>
+</div>
+</div>
+</div>
+<button class="w-full py-2 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-sm font-semibold rounded-lg transition-colors">
+                            Manage Calendar
+                        </button>
+</div>
+</section>
+<!-- Recent Tasks -->
+<section class="space-y-4 pb-12">
+<div class="flex items-center justify-between">
+<h2 class="text-lg font-bold">Recent Tasks</h2>
+<div class="flex gap-2">
+<button class="p-2 border border-slate-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-900">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+</button>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 text-xs font-semibold uppercase tracking-wider">
+<th class="px-6 py-4">Task Name</th>
+<th class="px-6 py-4">Assignee</th>
+<th class="px-6 py-4">Priority</th>
+<th class="px-6 py-4">Progress</th>
+<th class="px-6 py-4 text-right">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-sm">
+<tr>
+<td class="px-6 py-4 font-medium">Database Migration</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-slate-200 bg-cover bg-center" data-alt="John avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBUXllrDar7FWN6Z8CEQk50TdxfFQoWj-tcdUq-aLKaRYnRKCeD0QJgj8L5sI9wPRG0mYOkgrNiKz19bp4snyZKOUTpeg_yUEJtJF3R6KJU3K_v0g67GAXQZdkxj4MdA0fiBmkHu93R5M6mweLu83BEsk2dt-Q6QqbIyiqrU6IU1A1sLU8VFd1-R-mfBvblHh_P3DXKvUB5gk55n8GZlScVm6W_fADwQ7Ei6awntgn574eCuJ-suTLl6b-u5OtAUA5pBHHhT_i9Z7U')"></div>
+<span>John D.</span>
+</div>
+</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400 rounded-md text-[10px] font-bold">HIGH</span></td>
+<td class="px-6 py-4 w-64">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 mt-1">
+<div class="bg-primary h-1.5 rounded-full" style="width: 70%"></div>
+</div>
+<p class="text-[10px] text-slate-400 mt-1">70% Complete</p>
+</td>
+<td class="px-6 py-4 text-right"><span class="text-blue-600 font-semibold">In Progress</span></td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-medium">Credential Audit</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-slate-200 bg-cover bg-center" data-alt="Sarah avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAiALE0A1DFpE_m6g2MV8-4Q3rxF0MChuc8dvtWWWYP_hDjldsjeL8ywihlNdP8Q21qChc8vTH9aszFPIaXTbXpG0ESwuFriYB64zbaMbHnmz7HjnaGFEjxsqzqzdH8h3c9jDs8q7wjr-iRFIvfnhwtUEEFCGbOi5__zv9OzCuZhgf4zQBwdx0hzwwMq4HOg5xyf3cJDeWZrHSw-_yItBGEd4D73hjXSBLAmHadhM9uw2DF8uqwWV5VPaxwwUZZz1dC4zAn0JJ07Qs')"></div>
+<span>Sarah M.</span>
+</div>
+</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 rounded-md text-[10px] font-bold">MEDIUM</span></td>
+<td class="px-6 py-4 w-64">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 mt-1">
+<div class="bg-primary h-1.5 rounded-full" style="width: 30%"></div>
+</div>
+<p class="text-[10px] text-slate-400 mt-1">30% Complete</p>
+</td>
+<td class="px-6 py-4 text-right"><span class="text-blue-600 font-semibold">In Progress</span></td>
+</tr>
+<tr>
+<td class="px-6 py-4 font-medium">User Offboarding</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-2">
+<div class="size-6 rounded-full bg-slate-200 bg-cover bg-center" data-alt="System avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDuIg4L6YQAw-b3IYDV-TJ_mOmn5vq3eP_CKsEAncd4SqkvqzIS5e0HhehQuedUPHJAkXKezwhw-5IqhfepyVIfBQ_kFtyD9Th8suxZOmksAXwFHBHQUNVPnTLGUskUW4MVVvX9axjgKVZPuG6J0fAtBszDRCibf2o2EP8sPh-suJXhcqVl-kQrOheLiQnW3f5Ozoo4aByrEMaSRdkUn21FWHWtJTwxlmXenE4RY1KdjlLrZbR4-00SzTkCEHTTf2Jfcx1CHZIFIFE')"></div>
+<span>Automated</span>
+</div>
+</td>
+<td class="px-6 py-4"><span class="px-2 py-1 bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-400 rounded-md text-[10px] font-bold">LOW</span></td>
+<td class="px-6 py-4 w-64">
+<div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5 mt-1">
+<div class="bg-green-500 h-1.5 rounded-full" style="width: 100%"></div>
+</div>
+<p class="text-[10px] text-slate-400 mt-1">100% Complete</p>
+</td>
+<td class="px-6 py-4 text-right"><span class="text-green-600 font-semibold">Completed</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+</main>
+</div>
+</body></html>

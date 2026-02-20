@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Access Manager - Kanban Board</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5048e5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .kanban-column {
+            min-width: 320px;
+            max-width: 400px;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col">
+<div class="p-6">
+<div class="flex items-center gap-3 mb-8">
+<div class="bg-primary text-white p-2 rounded-lg">
+<span class="material-symbols-outlined block">shield_lock</span>
+</div>
+<div>
+<h1 class="text-slate-900 dark:text-white text-base font-bold leading-none">Access Manager</h1>
+<p class="text-slate-500 dark:text-slate-400 text-xs font-normal mt-1">Task Management</p>
+</div>
+</div>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">calendar_today</span>
+<span class="text-sm font-medium">Roles &amp; Schedules</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">menu_book</span>
+<span class="text-sm font-medium">Knowledge Base</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">encrypted</span>
+<span class="text-sm font-medium">Vault</span>
+</a>
+<!-- Active Link -->
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px] fill-1">task_alt</span>
+<span class="text-sm font-bold">Tasks</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="text-sm font-medium">Notifications</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto p-6 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3">
+<img alt="" class="size-9 rounded-full object-cover" data-alt="Professional profile photo of a male manager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFu2RUqk6rY0AXrIDQ2sJkaS9myNrWghoB4JtZNsSCOFqkJHabarPKEznohPrG52MrW3v9EDgN6hyMPpleM0kmy577bEPd4FBcvM9w38STSriRiGIPsuFeMEEdKI0md3vwkk-nYhY3WBs3cvtQHimSm46fKIaX6pAPSOiFxvv3nsDryD2qdf35YoG2tOXjXNnFRY7DBeh4T0rJ-1ujwxblaRL-dtKeTDSOgxF7rMZzG8i8znYuxF9Ya6nfUESZ6JANm7fqApsrfrQ"/>
+<div class="overflow-hidden">
+<p class="text-sm font-bold truncate">Alex Rivera</p>
+<p class="text-xs text-slate-500 truncate">System Admin</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-background-light dark:bg-background-dark">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-8 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-4">
+<h2 class="text-xl font-bold text-slate-900 dark:text-white">Task Board</h2>
+<div class="h-4 w-px bg-slate-300 dark:bg-slate-700 mx-2"></div>
+<div class="flex -space-x-2">
+<img alt="" class="size-7 rounded-full border-2 border-white dark:border-slate-900" data-alt="Portrait of a female team member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtOLkrVgA3u3cg1ZYphwAjq6SVbqQxvPMSdexk93LzMYEqB3K-F2_ZCv65CoIAydiUOAfl72tOxB6Km-qC0zixqroVhDv6uJaabsMTpGV7l2zLs5j7huzZObbSh4xEka9qlFrNN4A8eJMeikZhhlMpYLaxiAux2VEwe2ZlbTkgK6k1Cazqtel5Z-uhcn_XGlFzaFrpORESC2lNm66GPh7fNpaPYNsYE0dWsXT3jJQgzgeVlq-e6JTLRUM2DbMqxl64bT_bplliO44"/>
+<img alt="" class="size-7 rounded-full border-2 border-white dark:border-slate-900" data-alt="Portrait of a male team member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGFfB3oXQq_TMFCO-OrYZwkDL0o2nOwVc4Rk3ZKYEtsAOXGkrKaLXIErerp8vLV-TylJ_252CWDvUR1mcA0auAHqlpi9c5MY7am576anmA-ZO35iZ7g684coma2EwPLDr_HG-V2pKrwYhtN2vBehCPHR3GsuIcyvI7f2kVDnxhfn_3QHsROaijmucODG43srzTmcGYMvh3fh4YToaa3BF00f69hRxrpYcBKnAzFifQ7XGgv0iGBlryp6WLHRQomBjtXx57Swj9LQE"/>
+<img alt="" class="size-7 rounded-full border-2 border-white dark:border-slate-900" data-alt="Portrait of a female developer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGNBfvyRhOfO2wQiGoXI8B_ZfPu2k5rqTiStsyAKB5ERwjUl8wBPDKjZWBfa9M9K6t6dG3geKtZx7TArAJkAAtuRiclfdJueLjX8oD9A0YFl70MXe4hYJX6s4b91nB6zFI6JeoBqn4q75bec9vM6enQCTYW0jubzaWn_z4mypl0g4qFkRqOQewGW9Wmg_y4rH2NCmbJBb_NJV207KoArjQeUyW3SRi9vMjK3X-JijGr1_UosQI0yUKBL2ssi0eDO_gyE6YKvhd_oM"/>
+<div class="size-7 rounded-full border-2 border-white dark:border-slate-900 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-[10px] font-bold text-slate-500">+4</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm w-64 focus:ring-2 focus:ring-primary/50 transition-all" placeholder="Search tasks..." type="text"/>
+</div>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all shadow-sm">
+<span class="material-symbols-outlined text-lg">add</span>
+                        New Task
+                    </button>
+</div>
+</header>
+<!-- Kanban Board -->
+<div class="flex-1 overflow-x-auto p-8 custom-scrollbar">
+<div class="flex gap-6 h-full items-start">
+<!-- Column: To Do -->
+<div class="kanban-column flex flex-col h-full bg-slate-100/50 dark:bg-slate-800/30 rounded-xl p-4 shrink-0">
+<div class="flex items-center justify-between mb-4 px-2">
+<div class="flex items-center gap-2">
+<h3 class="font-bold text-slate-800 dark:text-slate-200">To Do</h3>
+<span class="bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400 text-xs font-bold px-2 py-0.5 rounded-full">3</span>
+</div>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex flex-col gap-4 overflow-y-auto custom-scrollbar pr-1">
+<!-- Task Card 1 -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-lg shadow-sm border border-slate-200 dark:border-slate-800 hover:shadow-md transition-shadow cursor-grab active:cursor-grabbing">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">High Priority</span>
+<img alt="" class="size-6 rounded-full" data-alt="Avatar of Alex Rivera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsMiKCh-nLDrOBjTeFcbg-1TJUsaB3bDl0qAK1KbyZuL70Su5BPL6AgySjL96fJ6sW56yOCOg2hlsdFz8dO0RWj9UeDYaIHPuB7Y-4vvr0ap9hdG0mmf-KU9JTpSewErp3afUQEVM2qVCu37HajjndIIdRKym8tZVz3G7ztRt8MKjJHhcQQIu9VMb-taTV5FJFAs0XdUiVAWf_tgx1J3Ie08MniXaVzOkx0Zbvt-uhZsNMuT0XkbHUDFBY_VBSgS5Gvjbv1fnSOKQ"/>
+</div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white mb-3">Review Admin Permissions</h4>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full mb-4">
+<div class="bg-primary h-full rounded-full" style="width: 0%"></div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 text-slate-400">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span class="text-xs">Oct 12</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">chat_bubble</span>
+<span class="text-xs">4</span>
+</div>
+</div>
+<span class="text-[10px] font-bold text-slate-500 uppercase">AM-101</span>
+</div>
+</div>
+<!-- Task Card 2 -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-lg shadow-sm border border-slate-200 dark:border-slate-800 hover:shadow-md transition-shadow cursor-grab">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600 dark:text-yellow-400 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">Medium</span>
+<img alt="" class="size-6 rounded-full" data-alt="Avatar of Sarah Chen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdc6WK7230R7M6M6olxyN9DEjtzUvpB8m6TbdJFWZLTl_SIlCK48dEMJu-V6z9YJK7mhxcTMFvaxV4dW8ZgnZuC9C79i0E3C0McDo_wn7lBFrZBGsS6-j-U7e3MzfLTfU_7CZC1JxKE396w_T9aS7O9sbnYOMZwHFtGWivf_BXIVhitz-U_qW0NBwjluGWMLzWaWw0h22F9CALiSEsPDd1DrGLglqM9Yqi7QVn-XqhhknTYCzksCfmj8EmIhDwgOhsDJG5mgjCwtw"/>
+</div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white mb-3">Update SSH Keys on Staging</h4>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full mb-4">
+<div class="bg-primary h-full rounded-full" style="width: 15%"></div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 text-slate-400">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span class="text-xs">Oct 14</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">chat_bubble</span>
+<span class="text-xs">0</span>
+</div>
+</div>
+<span class="text-[10px] font-bold text-slate-500 uppercase">AM-102</span>
+</div>
+</div>
+<!-- Task Card 3 -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-lg shadow-sm border border-slate-200 dark:border-slate-800 hover:shadow-md transition-shadow cursor-grab">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">Low</span>
+<img alt="" class="size-6 rounded-full" data-alt="Avatar of Marcus Wright" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0Egf141J1mFSsBuDyG_dBpaMM6pawqixdPIarwAL7lwf63LEih12lNbe_3FqdcDyQd0Tn2pPEinLEtb0BjXjSjQ4vzR2OKDnzizwRbPEoKX2HbQj7jL3AdMexYR-aTgwPCFAUfUc-GfK9scS1iTh8KyBSPU8hsRCVFcv8R3KsduqGkCnbUMbj8G9kUEP01jHcQvnsZ4SeC7pgr4oPPleEl19y0fBrQdKUmT5VhjKpzJkmGWmiQhyZ6AiQBYPs9U-vCGMAmP2kZ8s"/>
+</div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white mb-3">Audit System Logs Q3</h4>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full mb-4">
+<div class="bg-primary h-full rounded-full" style="width: 5%"></div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 text-slate-400">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span class="text-xs">Oct 20</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">chat_bubble</span>
+<span class="text-xs">12</span>
+</div>
+</div>
+<span class="text-[10px] font-bold text-slate-500 uppercase">AM-103</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: In Progress -->
+<div class="kanban-column flex flex-col h-full bg-slate-100/50 dark:bg-slate-800/30 rounded-xl p-4 shrink-0">
+<div class="flex items-center justify-between mb-4 px-2">
+<div class="flex items-center gap-2">
+<h3 class="font-bold text-slate-800 dark:text-slate-200">In Progress</h3>
+<span class="bg-primary/20 text-primary text-xs font-bold px-2 py-0.5 rounded-full">2</span>
+</div>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex flex-col gap-4 overflow-y-auto custom-scrollbar pr-1">
+<!-- Task Card 4 -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-lg shadow-sm border border-slate-200 dark:border-slate-800 hover:shadow-md transition-shadow cursor-grab">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">High Priority</span>
+<img alt="" class="size-6 rounded-full" data-alt="Avatar of Emily Blunt" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWSKU2fhbKvpIk85MX4T5VlOiYJOdK7-B50wSn0AuadpAWqUKgyMlD1_bcWgsBq4IruqQlaGd2EUKaV88rjfwLA4iV8qwIpq9tFSTCrbA3Jrim46FjVLzDZ5Neb6jkD5hS0FH7I0rxVMX3GqWYuEo9zqSTeuwsAc8swYxfd7oH7Qa5IiQ5Jc762qnlhIogXhSy3CqCZM_uXqYnPy493Nl845FOQ_5wXT7cfF0HfqT0U9MxkXZNpCOg9PwbFTUimj3MWHaGnrBIymk"/>
+</div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white mb-3">Migrate User Database to v2</h4>
+<div class="flex justify-between items-center text-[10px] font-bold text-slate-500 mb-1">
+<span>PROGRESS</span>
+<span>65%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full mb-4">
+<div class="bg-primary h-full rounded-full" style="width: 65%"></div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 text-slate-400">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span class="text-xs font-medium">Oct 11</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">chat_bubble</span>
+<span class="text-xs">18</span>
+</div>
+</div>
+<span class="text-[10px] font-bold text-slate-500 uppercase">AM-098</span>
+</div>
+</div>
+<!-- Task Card 5 -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-lg shadow-sm border border-slate-200 dark:border-slate-800 hover:shadow-md transition-shadow cursor-grab">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">High Priority</span>
+<img alt="" class="size-6 rounded-full" data-alt="Avatar of Alex Rivera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAE2rM0USEKYSGhDJqqfT7I4uKPAUzxSIn7o8jN06gD_4xxWu8_2wi50UMPkyeTMXLWGoo8E4U1knYcfizqbDlEdWRGb4l49dk3oSDQvQ_MwpVQtZDW-WLF_HRX1Ope56htWrV8LyBlUgDEuFJIXqDa8yrrAwgUGwjyJGbOcTs4re8SleDUnk15Tp9gyr_TxVDdxlwjhPFnY6hMvSmgV_j2WcnBpfBVRSB8-RSnRC_pjBfa7RKMcPXuNw2U2N1lbBMcWadYmVdK_vU"/>
+</div>
+<h4 class="text-sm font-bold text-slate-900 dark:text-white mb-3">Patch Security Vulnerability CVE-2023</h4>
+<div class="flex justify-between items-center text-[10px] font-bold text-slate-500 mb-1">
+<span>PROGRESS</span>
+<span>35%</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full mb-4">
+<div class="bg-primary h-full rounded-full" style="width: 35%"></div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 text-slate-400">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span class="text-xs">Oct 15</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">chat_bubble</span>
+<span class="text-xs">3</span>
+</div>
+</div>
+<span class="text-[10px] font-bold text-slate-500 uppercase">AM-100</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Done -->
+<div class="kanban-column flex flex-col h-full bg-slate-100/50 dark:bg-slate-800/30 rounded-xl p-4 shrink-0">
+<div class="flex items-center justify-between mb-4 px-2">
+<div class="flex items-center gap-2">
+<h3 class="font-bold text-slate-800 dark:text-slate-200">Done</h3>
+<span class="bg-green-100 dark:bg-green-900/40 text-green-600 dark:text-green-400 text-xs font-bold px-2 py-0.5 rounded-full">1</span>
+</div>
+<button class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+<span class="material-symbols-outlined">more_horiz</span>
+</button>
+</div>
+<div class="flex flex-col gap-4 overflow-y-auto custom-scrollbar pr-1">
+<!-- Task Card 6 -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-lg shadow-sm border border-slate-200 dark:border-slate-800 opacity-75 hover:opacity-100 transition-opacity cursor-grab">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">Completed</span>
+<img alt="" class="size-6 rounded-full grayscale" data-alt="Avatar of Sarah Chen grayscale" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmt4agir_QUwht3m6YmtdiP69mPqW5K1dlY54tV7m57qo1CMvEFKzlkQXx18nZzzJA8B1vb80AqOmrlw19aJdYq95Gh2aMxsVUBUTsdrYrIWmGzP8TC3OH5IRue4cbvQOxYYXB7xc93_2u8epl-_Ap2BCSvmh-_X0HLaPILjwSuedcQ7krIsVLukVzE8y8jbV_Mmfuzb_ubn4WE0HbBPTOiB17oxUPEC2tNnVyp_o4LZkuYVZT1YvUqio0kaAeHn_7xU__F6YBuJM"/>
+</div>
+<h4 class="text-sm font-bold text-slate-500 dark:text-slate-400 line-through mb-3">Setup 2FA for Support Team</h4>
+<div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full mb-4">
+<div class="bg-green-500 h-full rounded-full" style="width: 100%"></div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-3 text-slate-400">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-base">check_circle</span>
+<span class="text-xs">Done</span>
+</div>
+</div>
+<span class="text-[10px] font-bold text-slate-500 uppercase">AM-095</span>
+</div>
+</div>
+<!-- Add Task Placeholder -->
+<button class="border-2 border-dashed border-slate-300 dark:border-slate-700 rounded-lg p-4 flex flex-col items-center justify-center gap-2 text-slate-400 hover:text-primary hover:border-primary transition-colors group">
+<span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform">add_circle</span>
+<span class="text-xs font-bold uppercase">Add Another Task</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

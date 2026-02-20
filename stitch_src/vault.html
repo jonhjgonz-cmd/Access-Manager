@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Access Vault - Access Manager</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#5048e5",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121121",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-nav {
+            background-color: rgba(80, 72, 229, 0.1);
+            color: #5048e5;
+            border-right: 3px solid #5048e5;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 bg-white dark:bg-slate-900 border-r border-slate-200 dark:border-slate-800 flex flex-col shrink-0">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 rounded-lg bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined">shield_lock</span>
+</div>
+<div>
+<h1 class="text-base font-bold leading-none">Access Manager</h1>
+<p class="text-xs text-slate-500 mt-1">Enterprise Security</p>
+</div>
+</div>
+<nav class="flex-1 px-4 py-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Panel de Control</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 active-nav rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">cached</span>
+<span class="text-sm font-medium">Bóveda</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">key</span>
+<span class="text-sm font-medium">Credenciales</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-sm font-medium">Usuarios</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Ajustes</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-3 p-2">
+<div class="size-8 rounded-full bg-slate-200 bg-cover bg-center" data-alt="User profile avatar" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCY6ppdpxTwsTsxLQmEIYxAld0AVabLm_JdhDUVlWRTGhCvsoC1FH4b-NbuPULLqL-yd9cOgmVJNiSEHXAhbiQwZTdPWV0apF3tB8821yDGgZKjbiixHqAiU53Do-PpDAnKLbst82HI1L8qrhDxXk5eSeUxd0ospfSbOdgDCKYMTKe7BAYQD8U5NGXVba8w-oIyc9DgEa3sQ_XIgnMEyaqpaDbj2BXxfG-SE6x5_THZ5sbMVUgqhWxGDNrkCJW253IHx-efTDq0EM0')"></div>
+<div class="flex-1 overflow-hidden">
+<p class="text-sm font-medium truncate">Alex Rivera</p>
+<p class="text-xs text-slate-500 truncate">Rol Administrador</p>
+</div>
+<span class="material-symbols-outlined text-slate-400 text-lg">logout</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-background-light dark:bg-background-dark">
+<!-- Top Bar -->
+<header class="h-16 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between px-8 shrink-0">
+<div class="flex-1 max-w-2xl">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-transparent focus:border-primary focus:ring-0 rounded-lg text-sm transition-all" placeholder="Buscar credenciales, servicios, etiquetas..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4 ml-8">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-lg text-sm font-semibold transition-colors shadow-sm shadow-primary/20"><span class="material-symbols-outlined text-sm">add</span> Nuevo Acceso</button>
+<div class="h-6 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
+<button class="size-10 flex items-center justify-center text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-slate-900"></span>
+</button>
+</div>
+</header>
+<!-- Scrollable Content -->
+<section class="flex-1 overflow-y-auto p-8">
+<div class="mb-6 flex items-center justify-between">
+<div>
+<h2 class="text-2xl font-bold">Bóveda de Accesos</h2>
+<p class="text-slate-500 text-sm mt-1">Gestiona y comparte credenciales de equipo de forma segura.</p>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 text-xs font-medium bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg flex items-center gap-1 hover:bg-slate-50 transition-colors"><span class="material-symbols-outlined text-sm">filter_list</span> Filtrar</button>
+<button class="px-3 py-1.5 text-xs font-medium bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg flex items-center gap-1 hover:bg-slate-50 transition-colors"><span class="material-symbols-outlined text-sm">sort</span> Ordenar</button>
+</div>
+</div>
+<!-- Credential Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="p-5 flex-1">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">AWS Console</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-primary/10 text-primary mt-1">Infraestructura</span>
+</div>
+<div class="size-10 bg-slate-50 dark:bg-slate-800 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">cloud</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="group">
+<label class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-1">USUARIO</label>
+<div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 px-3 py-2 rounded-lg border border-slate-100 dark:border-slate-800">
+<code class="text-sm font-mono truncate">admin@company.aws</code>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+</div>
+<div>
+<label class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-1">CONTRASEÑA</label>
+<div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 px-3 py-2 rounded-lg border border-slate-100 dark:border-slate-800">
+<span class="text-sm font-mono tracking-widest text-slate-500">••••••••••••</span>
+<div class="flex items-center gap-2">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-y-2">
+<div class="text-[11px]">
+<span class="text-slate-400 font-medium">Entorno:</span>
+<span class="text-slate-700 dark:text-slate-300 ml-1">Producción</span>
+</div>
+<div class="text-[11px]">
+<span class="text-slate-400 font-medium">Puerto:</span>
+<span class="text-slate-700 dark:text-slate-300 ml-1">443</span>
+</div>
+<div class="text-[11px] col-span-2">
+<span class="text-slate-400 font-medium">Región:</span>
+<span class="text-slate-700 dark:text-slate-300 ml-1">us-east-1</span>
+</div>
+</div>
+<div class="mt-4">
+<label class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-1">NOTAS</label>
+<div class="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg text-xs text-slate-600 dark:text-slate-400 italic leading-relaxed">
+                                    Primary root console access. MFA required for all sessions. Rotated every 90 days.
+                                </div>
+</div>
+</div>
+<div class="px-5 py-3 bg-slate-50 dark:bg-slate-800/30 flex justify-end gap-2 rounded-b-xl border-t border-slate-100 dark:border-slate-800">
+<button class="p-1.5 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-md transition-all">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="p-5 flex-1">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Cloudflare Admin</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400 mt-1">Seguridad</span>
+</div>
+<div class="size-10 bg-slate-50 dark:bg-slate-800 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">security</span>
+</div>
+</div>
+<div class="space-y-3">
+<div>
+<label class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-1">USUARIO</label>
+<div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 px-3 py-2 rounded-lg border border-slate-100 dark:border-slate-800">
+<code class="text-sm font-mono truncate">dev-ops-team</code>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+</div>
+<div>
+<label class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-1">CONTRASEÑA</label>
+<div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 px-3 py-2 rounded-lg border border-slate-100 dark:border-slate-800">
+<span class="text-sm font-mono tracking-widest text-slate-500">••••••••••••</span>
+<div class="flex items-center gap-2">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-y-2">
+<div class="text-[11px]">
+<span class="text-slate-400 font-medium">Entorno:</span>
+<span class="text-slate-700 dark:text-slate-300 ml-1">Pruebas</span>
+</div>
+<div class="text-[11px]">
+<span class="text-slate-400 font-medium">Plan:</span>
+<span class="text-slate-700 dark:text-slate-300 ml-1">Enterprise</span>
+</div>
+<div class="text-[11px] col-span-2">
+<span class="text-slate-400 font-medium">ID:</span>
+<span class="text-slate-700 dark:text-slate-300 ml-1">CF_928347</span>
+</div>
+</div>
+<div class="mt-4">
+<label class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-1">NOTAS</label>
+<div class="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg text-xs text-slate-600 dark:text-slate-400 italic leading-relaxed">
+                                    Used for DNS management and WAF rules. Only authorized network IP range can access.
+                                </div>
+</div>
+</div>
+<div class="px-5 py-3 bg-slate-50 dark:bg-slate-800/30 flex justify-end gap-2 rounded-b-xl border-t border-slate-100 dark:border-slate-800">
+<button class="p-1.5 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-md transition-all">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="p-5 flex-1">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Stripe Dashboard</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 mt-1">FinOps</span>
+</div>
+<div class="size-10 bg-slate-50 dark:bg-slate-800 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+</div>
+<div class="space-y-3">
+<div>
+<label class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-1">USUARIO</label>
+<div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 px-3 py-2 rounded-lg border border-slate-100 dark:border-slate-800">
+<code class="text-sm font-mono truncate">finance-readonly</code>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+</div>
+<div>
+<label class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-1">CONTRASEÑA</label>
+<div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 px-3 py-2 rounded-lg border border-slate-100 dark:border-slate-800">
+<span class="text-sm font-mono tracking-widest text-slate-500">••••••••••••</span>
+<div class="flex items-center gap-2">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-y-2">
+<div class="text-[11px]">
+<span class="text-slate-400 font-medium">Cuenta:</span>
+<span class="text-slate-700 dark:text-slate-300 ml-1">Corporativa</span>
+</div>
+<div class="text-[11px]">
+<span class="text-slate-400 font-medium">Moneda:</span>
+<span class="text-slate-700 dark:text-slate-300 ml-1">USD</span>
+</div>
+<div class="text-[11px] col-span-2">
+<span class="text-slate-400 font-medium">Última Auditoría:</span>
+<span class="text-slate-700 dark:text-slate-300 ml-1">2023-10-12</span>
+</div>
+</div>
+<div class="mt-4">
+<label class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-1">NOTAS</label>
+<div class="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg text-xs text-slate-600 dark:text-slate-400 italic leading-relaxed">
+                                    Read-only access for the billing department. No live API key permissions.
+                                </div>
+</div>
+</div>
+<div class="px-5 py-3 bg-slate-50 dark:bg-slate-800/30 flex justify-end gap-2 rounded-b-xl border-t border-slate-100 dark:border-slate-800">
+<button class="p-1.5 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-md transition-all">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+<!-- Card 4 (Marketing Example) -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-md transition-shadow flex flex-col">
+<div class="p-5 flex-1">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-bold text-lg text-slate-900 dark:text-slate-100">Mailchimp</h3>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 mt-1">Marketing</span>
+</div>
+<div class="size-10 bg-slate-50 dark:bg-slate-800 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">mail</span>
+</div>
+</div>
+<div class="space-y-3">
+<div>
+<label class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-1">USUARIO</label>
+<div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 px-3 py-2 rounded-lg border border-slate-100 dark:border-slate-800">
+<code class="text-sm font-mono truncate">mktg-manager</code>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+</div>
+<div>
+<label class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-1">CONTRASEÑA</label>
+<div class="flex items-center justify-between bg-slate-50 dark:bg-slate-800/50 px-3 py-2 rounded-lg border border-slate-100 dark:border-slate-800">
+<span class="text-sm font-mono tracking-widest text-slate-500">••••••••••••</span>
+<div class="flex items-center gap-2">
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">visibility</span>
+</button>
+<button class="text-slate-400 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 grid grid-cols-2 gap-y-2">
+<div class="text-[11px]">
+<span class="text-slate-400 font-medium">Audience:</span>
+<span class="text-slate-700 dark:text-slate-300 ml-1">Master List</span>
+</div>
+<div class="text-[11px]">
+<span class="text-slate-400 font-medium">API:</span>
+<span class="text-slate-700 dark:text-slate-300 ml-1">v3.0</span>
+</div>
+<div class="text-[11px] col-span-2">
+<span class="text-slate-400 font-medium">Status:</span>
+<span class="text-emerald-500 dark:text-emerald-400 ml-1 font-bold italic">Active</span>
+</div>
+</div>
+<div class="mt-4">
+<label class="text-[10px] uppercase tracking-wider font-bold text-slate-400 block mb-1">NOTAS</label>
+<div class="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg text-xs text-slate-600 dark:text-slate-400 italic leading-relaxed">
+                                    Main account for newsletter distribution. 2FA linked to office phone.
+                                </div>
+</div>
+</div>
+<div class="px-5 py-3 bg-slate-50 dark:bg-slate-800/30 flex justify-end gap-2 rounded-b-xl border-t border-slate-100 dark:border-slate-800">
+<button class="p-1.5 text-slate-400 hover:text-primary hover:bg-primary/5 rounded-md transition-all">
+<span class="material-symbols-outlined text-lg">edit</span>
+</button>
+<button class="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-all">
+<span class="material-symbols-outlined text-lg">delete</span>
+</button>
+</div>
+</div>
+<!-- Empty State / Add New Placeholder -->
+<button class="border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-xl p-8 flex flex-col items-center justify-center text-slate-400 hover:text-primary hover:border-primary transition-all group">
+<div class="size-12 bg-slate-100 dark:bg-slate-800 rounded-full flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-all">
+<span class="material-symbols-outlined">add_circle</span>
+</div>
+<p class="font-bold text-sm">Agregar Nuevo Acceso</p>
+<p class="text-xs mt-1 text-slate-400">Almacena una nueva credencial segura</p>
+</button>
+</div>
+</section>
+</main>
+</div>
+</body></html>
