@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import AppShell from './components/layout/AppShell';
 
 import Dashboard from './pages/Dashboard';
@@ -9,7 +9,7 @@ import ScheduleConfig from './pages/ScheduleConfig';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<AppShell />}>
           <Route index element={<Dashboard />} />
@@ -21,7 +21,7 @@ function App() {
         {/* Redirigir cualquier ruta desconocida al Dashboard */}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
